@@ -1,8 +1,8 @@
-const { validationData } = require('../helper/utils');
-const { ClientCreatedEvent } = require('../schema/event/clientCreated');
-const { createClientInputSchema } = require('../schema/input/createClientValidation');
-const { emitClientCreated } = require('../service/emitClientCreated');
-const { createService } = require('../service/saveClientCreated');
+const { validationData } = require('../helper/utils.helper');
+const { ClientCreatedEvent } = require('../schema/event/clientCreated.event');
+const { createClientInputSchema } = require('../schema/input/createClientValidation.input');
+const { emitClientCreated } = require('../service/emitClientCreated.service');
+const { createService } = require('../service/saveClientCreated.service');
 
 const createClientDomain = async (commandPayload, commandMeta) => {
     try {

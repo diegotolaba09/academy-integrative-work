@@ -1,7 +1,7 @@
-const { getGiftFormatData, getBirthdayGift, validationData } = require('../helper/utils');
-const { createClientInputSchema } = require('../schema/input/createClientValidation');
-const { getClientService } = require('../service/getClientService');
-const { updateClientService } = require('../service/updateClientService');
+const { getGiftFormatData, getBirthdayGift, validationData } = require('../helper/utils.helper');
+const { createClientInputSchema } = require('../schema/input/createClientValidation.input');
+const { getClientService } = require('../service/getClient.service');
+const { updateClientService } = require('../service/updateClient.service');
 
 const createGiftDomain = async (eventPayload, eventMeta, _rawEvent) => {
     try {

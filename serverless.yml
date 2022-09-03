@@ -1,4 +1,4 @@
-service: crud-client-ebased-integrator
+service: diegoTolaba-practicoIntegrador
 
 provider:
   name: aws

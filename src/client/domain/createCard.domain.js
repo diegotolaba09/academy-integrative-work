@@ -1,7 +1,7 @@
-const { getCardFormatData, validationData, getAge, getCardType } = require('../helper/utils');
-const { createClientInputSchema } = require('../schema/input/createClientValidation');
-const { getClientService } = require('../service/getClientService');
-const { updateClientService } = require('../service/updateClientService');
+const { getCardFormatData, validationData, getAge, getCardType } = require('../helper/utils.helper');
+const { createClientInputSchema } = require('../schema/input/createClientValidation.input');
+const { getClientService } = require('../service/getClient.service');
+const { updateClientService } = require('../service/updateClient.service');
 
 const createCardDomain = async (eventPayload, eventMeta, _rawEvent) => {
     try {
