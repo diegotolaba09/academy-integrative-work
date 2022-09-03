@@ -1,4 +1,4 @@
-const { getAllClientsService } = require('../service/allClientService');
+const { getAllClientsService } = require('../service/allClient.service');
 
 const allClientDomain = async (_commandPayload, _commandMeta) => {
     try {

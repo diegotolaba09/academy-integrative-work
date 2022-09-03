@@ -1,5 +1,5 @@
-const { deleteDniClientInputSchema } = require('../schema/input/deleteDniClientInputSchema');
-const { deleteClientService } = require('../service/deleteClientService');
+const { deleteDniClientInputSchema } = require('../schema/input/deleteDniClientInputSchema.input');
+const { deleteClientService } = require('../service/deleteClient.service');
 
 const deleteClientDomain = async (commandPayload, commandMeta) => {
     try {
