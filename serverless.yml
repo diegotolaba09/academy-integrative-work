@@ -1,0 +1,29 @@
+service: crud-client-ebased-integrator
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - "sqs:SendMessage" 
+        - "sqs:GetQueueUrl"
+        - "sns:Publish"
+      Resource: "*"
+  environment:
+    CLIENT_TABLE: !Ref DiegoTolabaPracticoIntegradorClient
+    TOPIC_CLIENT: !Ref topicDiegoTolabaPracticoIntegradorClient
+
+functions:
+  - ${file(src/client/functions.yml)}
+
+resources:
+  - ${file(src/client/resources.yml)}

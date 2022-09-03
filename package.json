@@ -1,0 +1,27 @@
+{
+  "name": "academy-integrative-work",
+  "version": "1.0.0",
+  "description": "Practica de Serverless usando ebase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegotolaba09/academy-integrative-work.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diegotolaba09/academy-integrative-work/issues"
+  },
+  "homepage": "https://github.com/diegotolaba09/academy-integrative-work#readme",
+  "dependencies": {
+    "ebased": "^1.6.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "serverless-iam-roles-per-function": "^3.2.0"
+  }
+}

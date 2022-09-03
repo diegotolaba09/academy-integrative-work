@@ -1,0 +1,71 @@
+clientCreate:
+    name: diegoTolaba-practico-integrador-createClient
+    description: 'An API that resturns Created client!'
+    handler: src/client/handler/createClient.handler
+    memorySize: 128
+    events:
+      - http: 
+          path: clients
+          method: post
+    destinations:
+      onSuccess:
+        type: sns
+        arn: !Ref topicDiegoTolabaPracticoIntegradorClient
+
+giftCreate:
+    name: diegoTolaba-practico-integrador-createGift
+    description: 'Gift client!'
+    handler: src/client/handler/createGift.handler
+    memorySize: 128
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - diegoTolabaPracticoIntegradorCreateGift
+              - Arn
+
+cardCreate:
+    name: diegoTolaba-practico-integrador-createCard
+    description: 'Card client!'
+    handler: src/client/handler/createCard.handler
+    memorySize: 128
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - diegoTolabaPracticoIntegradorCreateCard
+              - Arn
+
+clientDelete:
+    name: diegoTolaba-practico-integrador-deleteClient
+    description: 'An API that resturns Client deleted!'
+    handler: src/client/handler/deleteClient.handler
+    memorySize: 128
+    events:
+      - http: 
+          path: clients/{dni}
+          method: delete
+
+clientUpdate:
+    name: diegoTolaba-practico-integrador-updateClient
+    description: 'An API that resturns Client updated!'
+    handler: src/client/handler/updateClient.handler
+    memorySize: 128
+    events:
+      - http: 
+          path: clients/{dni}
+          method: put
+    destinations:
+      onSuccess:
+        type: sns
+        arn: !Ref topicDiegoTolabaPracticoIntegradorClient
+
+clientAll:
+    name: diegoTolaba-practico-integrador-allClient
+    description: 'An API that resturns all clients!'
+    handler: src/client/handler/allClient.handler
+    memorySize: 128
+    events:
+      - http: 
+          path: clients
+          method: get
