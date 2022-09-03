@@ -1,0 +1,91 @@
+Resources:
+  DiegoTolabaPracticoIntegradorClient:
+    Type: 'AWS::DynamoDB::Table'
+    DeletionPolicy: Retain
+    Properties:
+      AttributeDefinitions:
+        -
+          AttributeName: "dni"
+          AttributeType: "S"   
+      KeySchema:
+        -
+          AttributeName: "dni"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      StreamSpecification:
+        StreamViewType: "NEW_AND_OLD_IMAGES"
+      TableName: ${self:service}-${self:provider.stage}-practicoIntegradorClient
+
+  topicDiegoTolabaPracticoIntegradorClient:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: topicDiegoTolabaPracticoIntegradorClient
+      TopicName: ${self:service}-${self:provider.stage}-topicClient
+
+  diegoTolabaPracticoIntegradorCreateGift:
+    Type: "AWS::SQS::Queue"
+    Properties:
+      QueueName: "diegoTolabaPracticoIntegradorCreateGift"
+  
+  diegoTolabaPracticoIntegradorCreateCard:
+    Type: "AWS::SQS::Queue"
+    Properties:
+      QueueName: "diegoTolabaPracticoIntegradorCreateCard"
+
+  giftTopicClientSubscription:
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      TopicArn: !Ref topicDiegoTolabaPracticoIntegradorClient
+      Endpoint:
+        Fn::GetAtt: [diegoTolabaPracticoIntegradorCreateGift, Arn]
+      Protocol: sqs
+      RawMessageDelivery: 'false'
+
+  cardTopicClientSubscription:
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      TopicArn: !Ref topicDiegoTolabaPracticoIntegradorClient
+      Endpoint:
+        Fn::GetAtt: [diegoTolabaPracticoIntegradorCreateCard, Arn]
+      Protocol: sqs
+      RawMessageDelivery: 'false'
+
+  snsToSqsCreateGiftSqsPolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: "allow-sns-messages"
+            Effect: Allow
+            Principal: "*"
+            Resource: !GetAtt
+              - diegoTolabaPracticoIntegradorCreateGift
+              - Arn
+            Action: "SQS:SendMessage"
+            Condition:
+              ArnEquals:
+                "aws:SourceArn": !Ref topicDiegoTolabaPracticoIntegradorClient
+      Queues:
+        - Ref: diegoTolabaPracticoIntegradorCreateGift
+
+  snsToSqsCreateCardSqsPolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: "allow-sns-messages"
+            Effect: Allow
+            Principal: "*"
+            Resource: !GetAtt
+              - diegoTolabaPracticoIntegradorCreateCard
+              - Arn
+            Action: "SQS:SendMessage"
+            Condition:
+              ArnEquals:
+                "aws:SourceArn": !Ref topicDiegoTolabaPracticoIntegradorClient
+      Queues:
+        - Ref: diegoTolabaPracticoIntegradorCreateCard
