@@ -1,0 +1,13 @@
+purchaseCreate:
+    name: diegoTolaba-practico-integrador-createPurchase
+    description: 'An API that resturns Created purchase!'
+    handler: src/purchase/handler/createPurchase.handler
+    memorySize: 128
+    events:
+      - http: 
+          path: purchases
+          method: post
+    # destinations:
+    #   onSuccess:
+    #     type: sns
+    #     arn: !Ref topicDiegoTolabaPracticoIntegradorClient

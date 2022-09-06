@@ -20,10 +20,13 @@ provider:
       Resource: "*"
   environment:
     CLIENT_TABLE: !Ref DiegoTolabaPracticoIntegradorClient
+    PURCHASE_TABLE: !Ref DiegoTolabaPracticoIntegradorPurchase
     TOPIC_CLIENT: !Ref topicDiegoTolabaPracticoIntegradorClient
 
 functions:
   - ${file(src/client/functions.yml)}
+  - ${file(src/purchase/functions.yml)}
 
 resources:
   - ${file(src/client/resources.yml)}
+  - ${file(src/purchase/resources.yml)}
