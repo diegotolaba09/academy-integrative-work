@@ -1,7 +1,7 @@
 Resources:
   DiegoTolabaPracticoIntegradorClient:
     Type: 'AWS::DynamoDB::Table'
-    DeletionPolicy: Retain
+    DeletionPolicy: Delete
     Properties:
       AttributeDefinitions:
         -
